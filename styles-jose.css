@@ -1,0 +1,90 @@
+*{
+  font-family: 'Ubuntu', sans-serif;
+  margin: 0;
+}
+
+.menu{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1.5px solid black;
+  background: rgb(17, 104, 219);
+}
+
+.menu ul{
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.menu ul li{
+  margin: .15em .6em;
+  font-weight: 600;
+}
+
+.menu a{
+  text-decoration: none;
+  color: black;
+}
+
+.menu form{
+  display: flex;
+}
+
+.menu button{
+  border: none;
+  background: transparent;
+}
+
+.menu-search{
+  border: 0 solid rgb(14, 88, 185);
+  height: 25px;
+  border-radius: 15px;
+  margin-right: .2em;
+  background-color: rgb(14, 88, 185);
+  color: whitesmoke;
+}
+
+.logo-menu{
+  margin: .5em 1.5em .2em;
+}
+
+.main-section{
+  /* padding: 1.5em 3em; */
+  width: 100%;
+}
+.container{
+  padding: 1.5em 3em;
+}
+
+.filters{
+  margin: 1em 0;
+  display: flex;
+}
+
+.filters button{
+  font-size: .85em;
+  font-weight: 600;
+  margin: 0 .4em;
+  background-color: whitesmoke;
+  border: 1px solid rgba(128, 128, 128, 0.473);
+  padding: .3em .8em;
+}
+
+.filters button[type=submit]{
+  background-color: rgb(37, 117, 223);
+  text-transform: uppercase;
+}
+
+.catalogo{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product{
+  margin: 1em 1em 1em 0;
+  height: 300px;
+  width: 200px;
+  background-color: black;
+}
