@@ -48,8 +48,13 @@ nav a{
   color: white;
 }
 
-.description  div[class^="col-"] {
+.description  div[class^="col"] {
   background: white;
+}
+
+.product-card{
+  border: none;
+  background-color: transparent;
 }
 
 .card-body div[class^="col"] {
@@ -71,4 +76,8 @@ nav a{
 
 .check{
   align-items: baseline;
+}
+
+tr td{
+  vertical-align: inherit !important;
 }
