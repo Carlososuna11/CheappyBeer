@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style-vista.css" />
+    <title>CheappyBeer</title>
+  </head>
+  <body>
+    <!-- header -->
+    <nav class="navbar navbar-default menu">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand mr-8" href="#"
+            ><img
+              class="logo-menu mr-4"
+              src="../img/cheappyBeer_logo.png"
+              alt="CheappyBeer Logo"
+              width="100"
+          /></a>
+        </div>
+        <form class="menu-search" action="">
+          <input class="menu-search" type="text" placeholder=" Search" />
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        <ul class="nav">
+          <li class="active m-2"><a href="#">Inicio</a></li>
+          <li class="m-2"><a href="#">Catálogo</a></li>
+          <li class="m-2"><a href="#">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- header/ -->
+
+    <!-- main -->
+    <div class="container-fluid miclase">
+      <div class="row pt-5 text-center">
+        <div class="col-6 offset-3 offset-md-2">
+          <h1>Nombre producto</h1>
+        </div>
+        <div class="col-3 text-left col-md-2">
+          <h1>6$</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- img product -->
+    <div class="container d-flex">
+      <div class="card ml-n5 mt-n5" style="width: 18rem;">
+        <img src="../img/Captura.PNG" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="container">
+            <div class="row">
+              <div class="col text-center">
+                <img src="../img/rating.jpg" alt="rating">
+              </div>
+            </div>
+            <div class="row text-center">
+              <div class="col mt-4">
+                <button type="button" class="btn btn-light">Apartar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container description">
+        <div class="row mt-3 mb-3 ml-1">
+          <div class="col-12">
+            Nam sed nulla nec nisi cursus aliquet. Sed scelerisque ante a est mollis, eu elementum quam feugiat. Quisque eget fringilla enim, a malesuada erat.
+          </div> 
+        </div>
+        <div class="row ml-1">
+          <div class="col-6 mt-2">
+            Aliquam tincidunt sapien ac tellus commodo dignissim. Cras pharetra erat non odio finibus, ac feugiat sem dignissim. Duis et sem mauris. Suspendisse eu malesuada enim.
+          </div>
+          <div class="col-6 location mt-2 mb-2">
+            <h4>Ubicacion</h4>
+            <img src="../img/LocationImg.jpg" alt="ubicacion">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- img product/ -->
+
+    <!-- main/ -->
+
+    <!-- otros producto -->
+    <div class="container-fluid seccion">
+      <div class="row">
+        <div class="col mt-5 ml-5">
+          <h1>Te podría interesar...<h1/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col ml-5">
+          <h3>Productos</h3>
+        </div>
+        <div class="col text-right">
+          <h3>Ordenar por:</h3>
+        </div>
+        <div class="col d-flex check">
+          <input class="mr-3" type="radio" name="radio">
+          <p><h3>Precio</h3></p>
+        </div>
+        <div class="col d-flex check">
+          <input class="mr-3" type="radio" name="radio">
+          <p><h3>Rating</h3></p>
+        </div>
+      </div>
+      <div class="row mt-4 mb-4">
+        <div class="col-2 text-center">
+          <img class="img-fluid rounded-circle" src="../img/cacique.jpg" alt="producto">
+          <p>
+            Nombre producto
+          </p> 
+        </div>
+        <div class="col-2 text-center mt-5">
+          <p>
+            ubicacion proveedor
+          </p>
+        </div>
+        <div class="col-2 text-center mt-5">
+          <p>
+            precio
+          </p>
+        </div>
+        <div class="col-2 text-center mt-5">
+          <p>
+            rating
+          </p>
+        </div>
+        <div class="col-2 text-center mt-5">
+          <p>
+            icono vista
+          </p>
+        </div>
+        <div class="col-2 text-center mt-5">
+          <button type="button" class="btn btn-light">Apartar</button>
+        </div>
+      </div>
+      <div class="row mt-4 mb-4">
+        <div class="col-2 text-center">
+          <img class="img-fluid rounded-circle" src="../img/gran-reserva.jpg" alt="producto">
+          <p>
+            Nombre producto
+          </p> 
+        </div>
+        <div class="col-2 text-center mt-5">
+          <p>
+            ubicacion proveedor
+          </p>
+        </div>
+        <div class="col-2 text-center mt-5">
+          <p>
+            precio
+          </p>
+        </div>
+        <div class="col-2 text-center mt-5">
+          <p>
+            rating
+          </p>
+        </div>
+        <div class="col-2 text-center mt-5">
+          <p>
+            icono vista
+          </p>
+        </div>
+        <div class="col-2 text-center mt-5">
+          <button type="button" class="btn btn-light">Apartar</button>
+        </div>
+      </div>
+      <div class="row mt-4 mb-4">
+        <div class="col-2 text-center">
+          <img class="img-fluid rounded-circle" src="../img/ron_diplomatico_reserva_smartbites.jpg" alt="producto">
+          <p>
+            Nombre producto
+          </p> 
+        </div>
+        <div class="col-2 text-center mt-5">
+          <p>
+            ubicacion proveedor
+          </p>
+        </div>
+        <div class="col-2 text-center mt-5">
+          <p>
+            precio
+          </p>
+        </div>
+        <div class="col-2 text-center mt-5">
+          <p>
+            rating
+          </p>
+        </div>
+        <div class="col-2 text-center mt-5">
+          <p>
+            icono vista
+          </p>
+        </div>
+        <div class="col-2 text-center mt-5">
+          <button type="button" class="btn btn-light">Apartar</button>
+        </div>
+      </div>
+    </div>
+    <!-- otros productos/ -->
+
+  </body>
+</html>
+
