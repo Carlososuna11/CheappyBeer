@@ -68,3 +68,7 @@ nav a{
 .location img{
   height: 100px;
 }
+
+.check{
+  align-items: baseline;
+}
