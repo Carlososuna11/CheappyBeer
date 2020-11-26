@@ -34,6 +34,8 @@ class Catalogo(ListView):
             precios[i.nombre].append([i.precio,i.id,i.nombre_provedor])
         for key,value in precios.items():
             precios[key].sort(key=lambda x:x[0])
+        nombres2 = list(nombres)
+        context['nombres2'] = nombres2
         context['tipos'] = tipos
         context['ubicaciones'] = ubicaciones
         context['nombres']=nombres
@@ -91,6 +93,7 @@ class CatalogoFiltro(ListView):
                 licores.append(elem)
             if flag1 == True and flag2 == True:
                 licores.append(elem)
+        nombres2 = list(nombres)
         nombres=[]
         precios={}
         for i in licores:
@@ -104,6 +107,7 @@ class CatalogoFiltro(ListView):
         context['nombres']=nombres
         context['precios']=precios
         context['provedores']= provedor
+        context['nombres2']=nombres2
         context['title'] = 'Catálogo de Productos'
         return context
 

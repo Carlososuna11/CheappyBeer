@@ -28,10 +28,27 @@
         <button type="button" onclick="Validar()">Filtrar</button>
     </form>
 </div>
+<div class="row mb-4 provedores">        
+</div>
+    <h2>{{Licores}}</h2>
+        <button class="col btn-catalogo" onclick="plusSlides(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class=" catalogo">
+    {% for nombre in nombres2  %}
+            <div class="col product">
+                <a href="{% url 'descripcion' nombre nombre|fist_id_name %}"><img src="{% static nombre|to_and_licores %}" alt="" width="200"></a>
+            </div>
+    {% endfor %}
+        </div>
+        <button class="col btn-catalogo" onclick="plusSlides(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+</div>
 <div class="container">
-    <div class="row">
+    <div class="row" style="width: 1100px;">
     {% for nombre in nombres%}
-            <div class="card col" style="width: 18erm;">
+            <div class="card col" style="width: 350px;">
                     <div class="badge badge-warning">
                         <h5 class=" justify-content-center mw-100 card-title" style="font-size:30px;"> <b>{{nombre|mas_barato:precios}}$</b></h5>
                     </div>

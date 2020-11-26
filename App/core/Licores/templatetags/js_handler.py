@@ -42,3 +42,11 @@ def uno(value,nombre):
 @register.filter
 def productos_pro(provedor,index):
     return provedor[index]
+
+@register.filter
+def to_and_licores(nombre):
+    return str(list(Licor.objects.filter(nombre=nombre))[0].imagen).replace("core/Licores/static","")
+
+@register.filter
+def fist_id_name(nombre):
+    return list(Licor.objects.filter(nombre=nombre))[0].id
