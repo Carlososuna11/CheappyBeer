@@ -4,7 +4,8 @@ from django.shortcuts import *
 from django.views.generic import *
 from django.urls import *
 from core.Licores.models import * 
-
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.utils.decorators import method_decorator
 
 class Catalogo(ListView):
     model = Licor
@@ -14,6 +15,7 @@ class Catalogo(ListView):
         context = super().get_context_data(**kwargs)
         nombres=[]
         precios={}
+        #{'anis':[[12,1,saco],[],[]]}
         provedores_n =[]
         provedor={}
         for i in Licor.objects.all():
@@ -79,6 +81,20 @@ class ModificarLicor(UpdateView):
 class ListaLicores(ListView):
     model = Licor
     template_name = 'Licores/lista_licores.html'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        id_field = int(request.POST['id'])
+        try:
+            Licor.objects.get(pk=id_field).delete()
+        except Exception as e:
+            print(e)
+            data['error'] = str(e)
+        return JsonResponse(data)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
