@@ -1,0 +1,46 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% load js_handler %}
+{% block estilos %}
+    <link rel="stylesheet" href="{% static 'Licores/css/styles.css' %}" />
+{% endblock estilos %}
+
+{% block body %}
+     <div class="container">
+      <div class="content col-lg-12 mt-3">
+        <h1 class="ml-0">Catálogo de Licores</h1>
+            <div class="row mb-4">
+            <form class="row pl-3 filters">
+                <div><button>Tipo</button></div>
+                <div><button>Precio</button></div>
+                <div><button>Ubicación</button></div>
+                <div><button>Rating</button></div>
+                <button type="submit">Filtrar</button>
+            </form>
+            </div>
+            <div class="provedores">        
+            </div>
+                {% for provedor in provedores_n  %}
+                <h2>{{provedor}}</h2>
+                    <div class="row catalogo">
+                        <button class="col btn-catalogo" onclick="plusSlides(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        {% for producto in provedores|productos_pro:provedor %}
+                            <div class="col product">
+                                <a href="{% url 'descripcion' producto.nombre producto.id %}"><img src="{% static producto.imagen|to_and %}" alt="" width="200"></a>
+                            </div>
+                        {% endfor %}
+                        <button class="col btn-catalogo" onclick="plusSlides(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                
+                {% endfor %}
+            </div>
+      </div>
+    </div>
+    <script src="{% static 'Licores/js/main.js' %}"></script>
+{% endblock body %}
+    
+   

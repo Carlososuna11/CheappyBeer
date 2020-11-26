@@ -1,0 +1,126 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% load js_handler%}
+
+{% block estilos %}
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="{% static 'plugins/AdminLTE/plugins/fontawesome-free/css/all.min.css' %}">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="{% static 'plugins/AdminLTE/dist/css/adminlte.min.css' %}">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/styles-producto.css' %}">
+{% endblock estilos %}
+{% block body %}
+<div class="container">
+  <div class="row">
+      <div class="col-sm-4">
+          <h2>
+              Mis Productos
+          </h2>
+      </div>
+      <div class="col-sm-8 text-right">
+            <a href="{% url 'crear' %}" class="btn btn-primary">Agregar Producto</a>
+      </div>
+  </div>
+</div>
+
+<!-- Tabla con scrollbar vertical -->
+
+<div class="d-flex justify-content-center" style="height:600px;overflow-y:auto;"> 
+  <div class="cols-lg-12">
+      <table class="table table-bordered table-hover">
+          <thead>
+              <tr id="first_row">
+                  <th>
+                      Imagen
+                  </th>
+                  <th>
+                      Nombre
+                  </th>
+                  <th>
+                      Tipo
+                  </th>
+                  <th>
+                      Precio
+                  </th>
+                  <th>
+                      Descripción
+                  </th>
+                  <th>
+                      Stock
+                  </th>
+                  <th>
+                      Acciones
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+            {%for c in object_list %}
+                <tr>
+                    <td>                
+                      <img src= "{% static c.imagen|to_and%}"alt="" width = "80px" height = "80px"> 
+                    </td>    
+                    <td>{{c.nombre}}</td>
+                    <td>{{c.tipo}}</td>    
+                    <td>{{c.precio}}</td>
+                    <td>{{c.descripcion}}</td>
+                    <td>{{c.stock}}</td> 
+                    <td>
+                      <a href="{% url 'descripcion' c.nombre c.id %}">
+                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                      </a>
+                      <a href="{% url 'editar' c.id %}">
+                        <button type="button" class="btn btn-info"><i class="far fa-edit"></i></button>
+                      </a>
+                        <button class="btn btn-danger" onclick="Delete({{c.id}})"><i class="far fa-trash-alt"></i></button>
+                    </td>    
+                  </tr> 
+            {%endfor%}           
+          </tbody>
+      </table>
+  </div>
+</div>
+<script>
+    function Delete(id){
+        Swal.fire({
+        title: 'Estas Seguro?',
+        text: "Una vez hecho no podrás revertir el Cambio!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si,Eliminar!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire(
+            'Eliminado!',
+            'El Licor se ha Eliminado Satisfactoriamente!',
+            'success'
+            );
+            $.ajax({
+                url: window.location.pathname,
+                type: 'POST',
+                data: {'id':id},
+                dataType: 'json'
+            }).done(function (data) {
+                console.log(data);
+                if (!data.hasOwnProperty('error')) {
+                    location.href = '{{ list_url }}';
+                    return false;
+                }
+                message_error(data.error);
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                alert(textStatus + ': ' + errorThrown);
+            }).always(function (data) {
+
+            });
+        }
+        })
+    }
+</script>
+{% endblock body %}

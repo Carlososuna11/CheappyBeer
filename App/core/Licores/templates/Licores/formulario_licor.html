@@ -1,0 +1,100 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% load js_handler %}
+{% block estilos %}
+    <link rel="stylesheet" href="{% static 'Licores/css/crear.css' %}">
+{% endblock estilos %}
+{% block body %}
+    <div class= "container">
+        <h1>{{title}}</h1>
+        {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-ban"></i> Ha ocurrido un error al querer guardar el registro</h5>
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form  method="post" class="row" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class = "col-lg-3 producto-aside" >
+                <img id="myimage"class="img-product mb-2 "  src="{% static imagen %}" alt="" width = "380px" height = "250px">
+                {% for field in form.visible_fields %}
+                    {% if field.label == "Imagen del Licor" %}
+
+                        <div class='{{field.id}}'>
+                            <label class= "custom-file-upload">
+                                {{field}}
+                            <i class="fas fa-upload mr-2"></i>Subir Imagen
+                            </label>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class = "col-lg-9 row">
+                {% for field in form.visible_fields %}
+                    {% if field.label  != "Imagen del Licor"%}
+                        <div class ="col">
+                            <label for="email" class ="row">{{field.label}}</label>
+                            {{field}}
+                        </div>
+                        {% if field.id == "0" %}
+                            <div class= "w-100"></div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div class ="col-lg-9 row">
+            
+            <div class="forms-button mr-5 pr-5">
+                    <button class="btn btn-success mr-2" type="submit"><i class="fas fa-save mr-2"></i>Guardar</button>
+                    <button class="btn btn-danger" type="button" onclick="{% go_to_url '/listalicores' %}"><i class="fas fa-ban mr-2"></i>Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        {% if form.errors %}
+            var Errores = '';
+            {% for field in form %}
+                {% for error in field.errors %}
+                    Errores+= '<b>{{field.label}}</b>: {{error}}<br>';
+                {% endfor %}
+            {% endfor %}
+            Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            html: Errores
+            });
+        {% endif %}
+        $('.close').on('click',function(e){
+            $("div[class='alert alert-danger alert-dismissible']").remove();
+        });
+        $('form').on('submit',function (e) {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Tu Producto esta siendo Guardado...',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#myimage').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $(document.querySelector("body > div > form > div.col-lg-3.producto-aside > div > label > a")).remove();
+    $(document.querySelector("body > div > form > div.col-lg-3.producto-aside > div > label > a")).remove();
+     //$("label[class='alert alert-danger alert-dismissible']").remove();
+    </script>
+{% endblock body %}
+

@@ -1,0 +1,100 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% load js_handler %}
+{% block estilos %}
+    <link rel="stylesheet" href="{% static 'Licores/css/styles.css' %}" />
+{% endblock estilos %}
+{% block body %}
+<div class="row mb-4">
+    <form class="row pl-3 filters">
+        <div><label for="email">Tipo</label>
+        <select name="Tipo" id="tipo-select">
+            <option value="Todos" selected>Todos</option>
+            {% for tipo in tipos %}
+                <option value="{{tipo}}">{{tipo}}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <div><label for="email">Precio</label><input type="number" name="Precio" id="precio-form" value = "0"></div>
+        <div><label for="email">Ubicacion</label>
+        <select name="Ubicacion" id="ubicacion-select">
+            <option value="Todos" selected>Todos</option>
+            {% for ubicacion in ubicaciones %}
+                <option value="{{ubicacion}}">{{ubicacion}}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <div><label for="email">Valoracion</label><input type="number" name="valoracion-form" id="valoracion-form" value = "0"></div>
+        <button type="button" onclick="Validar()">Filtrar</button>
+    </form>
+</div>
+<div class="row mb-4 provedores">        
+</div>
+    <h2>{{Licores}}</h2>
+        <button class="col btn-catalogo" onclick="plusSlides(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class=" catalogo">
+    {% for nombre in nombres2  %}
+            <div class="col product">
+                <a href="{% url 'descripcion' nombre nombre|fist_id_name %}"><img src="{% static nombre|to_and_licores %}" alt="" width="200"></a>
+            </div>
+    {% endfor %}
+        </div>
+        <button class="col btn-catalogo" onclick="plusSlides(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+</div>
+<div class="container">
+    <div class="row" style="width: 1100px;">
+    {% for nombre in nombres%}
+            <div class="card col" style="width: 350px;">
+                    <div class="badge badge-warning">
+                        <h5 class=" justify-content-center mw-100 card-title" style="font-size:30px;"> <b>{{nombre|mas_barato:precios}}$</b></h5>
+                    </div>
+                    <img class="card-img-top" src="{% static nombre|to_and_img:precios %}" alt="Card image cap" width="380px" height="380px">
+                    <div class="card-body">
+                    <a href="{% url 'descripcion' nombre precios|uno:nombre|val:1 %}">
+                        <h5 class="card-title">{{nombre}}</h5>
+                    </a>
+                        <p class="card-text">{{nombre|desc:precios}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <h5 class="card-text">Ofertas</h5>
+                        {% for comp in precios|cinco:nombre %}
+                            <li class="list-group-item"><a href="{% url 'descripcion' nombre comp|val:1 %}">{{comp|val:0}}$ por {{comp|val:2}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% if forloop.counter|divisibleby:4 %}
+                    <div class="w-100"></div>
+                {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<script>
+    function Validar(){
+        var precio = document.querySelector("#precio-form");
+        var tipo = document.querySelector("#tipo-select");
+        var ubicacion = document.querySelector("#ubicacion-select");
+        var valoracion = document.querySelector("#valoracion-form");
+        if (precio.value<0){
+            Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Valor Invalido para el Precio'
+            });
+        }else if((valoracion.value <0) || (valoracion.value>5)){
+            Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Valor Invalido para la valoración'
+            });
+        }else{
+            console.log(tipo.value)
+            window.location.href = "/catalogo/filtro/"+tipo.value.toString()+"/"+precio.value.toString()+"/"+ubicacion.value.toString()+"/"+valoracion.value.toString();
+        }
+
+    }
+</script>
+{% endblock body %}

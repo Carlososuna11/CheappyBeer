@@ -15,7 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from config.views import *
+from django.views.generic import *
+from core.Licores.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',Indexview.as_view()),
+    path('catalogo',Catalogo.as_view(),name='catalogo'),
+    path('crear',CrearLicor.as_view(),name='crear'),
+    path('editar/<int:pk>',ModificarLicor.as_view(),name='editar'),
+    path('catalogo/descripcion/<str:nombre>/<int:pk>',DescripcionLicor.as_view(),name='descripcion'),
+    path('listalicores', ListaLicores.as_view(), name= 'listalicores'),
+    path('catalogo/filtro/<str:tipo>/<str:precio>/<str:ubicacion>/<str:valoracion>',CatalogoFiltro.as_view(),name="filtrico")
 ]
