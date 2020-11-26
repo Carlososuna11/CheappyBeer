@@ -1,0 +1,34 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% load js_handler %}
+{% block estilos %}
+{% endblock estilos %}
+{% block body %}
+<div class="container">
+    <div class="row">
+    {% for nombre in nombres%}
+            <div class="card col" style="width: 18rem;">
+                    <div class="badge badge-warning">
+                        <h5 class=" justify-content-center mw-100 card-title" style="font-size:30px;"> <b>{{nombre|mas_barato:precios}}$</b></h5>
+                    </div>
+                    <img class="card-img-top" src="{% static nombre|to_and_img:precios %}" alt="Card image cap" width="380px" height="380px">
+                    <div class="card-body">
+                    <a href="{% url 'descripcion' nombre precios|uno:nombre|val:1 %}">
+                        <h5 class="card-title">{{nombre}}</h5>
+                    </a>
+                        <p class="card-text">{{nombre|desc:precios}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <h5 class="card-text">Ofertas</h5>
+                        {% for comp in precios|cinco:nombre %}
+                            <li class="list-group-item"><a href="{% url 'descripcion' nombre comp|val:1 %}">{{comp|val:0}}$ por {{comp|val:2}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% if forloop.counter|divisibleby:4 %}
+                    <div class="w-100"></div>
+                {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock body %}

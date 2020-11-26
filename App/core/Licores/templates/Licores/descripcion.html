@@ -1,0 +1,172 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% load js_handler %}
+    {% block estilos %}
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+          <!-- Tell the browser to be responsive to screen width -->
+        <!-- Font Awesome -->
+       <link rel="stylesheet" href="{% static 'plugins/AdminLTE/plugins/fontawesome-free/css/all.min.css' %}">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="{% static 'plugins/AdminLTE/dist/css/adminlte.min.css' %}">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> 
+
+        <link rel="stylesheet" href="{% static 'Licores/css/styles-descripcion.css' %}">
+        
+    {% endblock estilos %}
+    {% block body %}
+            <div class="container-fluid miclase">
+                <div class="row pt-5 text-center">
+                    <div class="col-6 offset-3 offset-md-2">
+                    <h1>{{Licor.nombre|upper}}</h1>
+                    </div>
+                    <div class="col-3 text-left col-md-2">
+                    <h1>${{Licor.precio}}</h1>
+                    </div>
+                </div>
+            </div>
+         <div class="container d-flex ">
+            <div class="card text-white bg-dark mb-3 ml-n5 mt-n5 "  style="width: 22rem;">
+                <img src="{% static Licor.imagen|to_and%}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                    <div class="col text-center p-0 row justify-content-center">
+                        <strong class="border border-dark px-2 bg-light">{{Licor.valoracion}}</strong>
+                        <div class="border px-1 border-dark bg-light">
+                        <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                        {% comment %} <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> {% endcomment %}
+                        </div>
+                        <div>
+                            <label for="email">
+                                {{Licor.stock}}
+                                <b>
+                                    {% if Licor.stock == 1 %}
+                                    Unidad Disponible
+                                {% else %}
+                                    Unidades Disponibles
+                                {% endif %}
+                                </b>
+                            </label>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row text-center">
+                    <div class="col mt-4">
+                        <form action="">
+                            <label for="email">Cantidad</label><input type="number" style ="width:35px; height:40px;"name="" id="cantidad_apartar" required>
+                            <button type="button" onclick="Apartar()" class="btn btn-primary">Apartar</button>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="container description">
+                <div class="row mt-3 mb-3 ml-1">
+                <div class="col-12 rounded py-1">
+                    <h4>Descripción</h4>
+                    {{Licor.descripcion}}
+                </div> 
+                </div>
+                <div class="row ml-1">
+                <div class="col rounded mr-4 mt-2 pt-2">
+                    <h4>Infomación del proveedor</h4>
+                    {{Licor.nombre_provedor}}
+                </div>
+                <div class="col rounded location mt-2 mb-2 pt-2">
+                    <h4>Ubicación</h4>
+                    {{Licor.ubicacion}}
+                    <figure class="text-center">
+                    <img src="{% static 'img/LocationImg.jpg' %}" alt="ubicacion">
+                    </figure>
+                </div>
+                </div>
+            </div>
+            </div>
+        <div class="card">
+              <div class="card-header">
+                <h3 class="card-title badge badge-pill badge-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Quizas Te pueda Interesar</font></font></h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">#</font></font></th>
+                      <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Licor</font></font></th>
+                      <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Provedor</font></font></th>
+                      <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Precio</font></font></th>
+                      <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Stock</font></font></th>
+                      <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Valoracion</font></font></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                        
+                            {% for licor in Licores %}
+                            <tr>
+                                
+                                    <div>
+                                        <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{forloop.counter}}</font></font></td>
+                                        <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{licor.nombre}}</font></font></td>
+                                        <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{licor.nombre_provedor}}</font></font></td>
+                                        <td><span class="tag tag-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{licor.precio}}</font></font></span></td>
+                                        <td><span class="tag tag-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{licor.stock}}</font></font></span></td>
+                                        <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                    </font></font></td>
+                                    <td><a class="badge badge-primary " href="{% url 'descripcion' licor.nombre licor.id %}"> <i class="far fa-eye"></i></a></td>
+                                    </div>
+                            </tr>
+                            {% endfor %}
+                        
+                  </tbody>
+                </table>
+              </div>
+            </div>
+    <script>
+        function Apartar(){
+            var cantidad = document.getElementById('cantidad_apartar').value;
+            if (cantidad <1){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    html: 'Error Asociado con la Cantidad a apartar',
+                    footer: '<p>Este error se debe a la  <b> cantidad </b>  que quieres comprar </p>'
+                });
+                var elemento = document.querySelector("#cantidad_apartar")
+                    elemento.classList.add("border-danger");
+                    elemento.classList.add("border");
+            }else{
+               if (cantidad > {{Licor.stock}}){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        html: 'La cantidad a apartar excede el inventario',
+                        footer: '<p>Este error se debe a la  <b> cantidad </b>  que quieres comprar </p>'
+                    });
+                    var elemento = document.querySelector("#cantidad_apartar")
+                    elemento.classList.add("border-danger");
+                    elemento.classList.add("border");
+               }else{
+                   Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Se ha apartado Exitosamente El producto!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    var elemento = document.querySelector("#cantidad_apartar")
+                    elemento.classList.remove("border-danger");
+                    elemento.classList.remove("border");
+                    window.location = "{% url 'catalogo' %}";
+               }
+            }
+        }
+    </script>
+    {% endblock body %}
+   
