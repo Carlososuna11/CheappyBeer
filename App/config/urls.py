@@ -26,4 +26,5 @@ urlpatterns = [
     path('editar/<int:pk>',ModificarLicor.as_view(),name='editar'),
     path('catalogo/descripcion/<str:nombre>/<int:pk>',DescripcionLicor.as_view(),name='descripcion'),
     path('listalicores', ListaLicores.as_view(), name= 'listalicores'),
+    path('catalogo/filtro/<str:tipo>/<str:precio>/<str:ubicacion>/<str:valoracion>',CatalogoFiltro.as_view(),name="filtrico")
 ]

@@ -2,12 +2,36 @@
 {% load static %}
 {% load js_handler %}
 {% block estilos %}
+    <link rel="stylesheet" href="{% static 'Licores/css/styles.css' %}" />
 {% endblock estilos %}
 {% block body %}
+<div class="row mb-4">
+    <form class="row pl-3 filters">
+        <div><label for="email">Tipo</label>
+        <select name="Tipo" id="tipo-select">
+            <option value="Todos" selected>Todos</option>
+            {% for tipo in tipos %}
+                <option value="{{tipo}}">{{tipo}}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <div><label for="email">Precio</label><input type="number" name="Precio" id="precio-form" value = "0"></div>
+        <div><label for="email">Ubicacion</label>
+        <select name="Ubicacion" id="ubicacion-select">
+            <option value="Todos" selected>Todos</option>
+            {% for ubicacion in ubicaciones %}
+                <option value="{{ubicacion}}">{{ubicacion}}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <div><label for="email">Valoracion</label><input type="number" name="valoracion-form" id="valoracion-form" value = "0"></div>
+        <button type="button" onclick="Validar()">Filtrar</button>
+    </form>
+</div>
 <div class="container">
     <div class="row">
     {% for nombre in nombres%}
-            <div class="card col" style="width: 18rem;">
+            <div class="card col" style="width: 18erm;">
                     <div class="badge badge-warning">
                         <h5 class=" justify-content-center mw-100 card-title" style="font-size:30px;"> <b>{{nombre|mas_barato:precios}}$</b></h5>
                     </div>
@@ -31,4 +55,29 @@
         {% endfor %}
     </div>
 </div>
+<script>
+    function Validar(){
+        var precio = document.querySelector("#precio-form");
+        var tipo = document.querySelector("#tipo-select");
+        var ubicacion = document.querySelector("#ubicacion-select");
+        var valoracion = document.querySelector("#valoracion-form");
+        if (precio.value<0){
+            Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Valor Invalido para el Precio'
+            });
+        }else if((valoracion.value <0) || (valoracion.value>5)){
+            Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Valor Invalido para la valoración'
+            });
+        }else{
+            console.log(tipo.value)
+            window.location.href = "/catalogo/filtro/"+tipo.value.toString()+"/"+precio.value.toString()+"/"+ubicacion.value.toString()+"/"+valoracion.value.toString();
+        }
+
+    }
+</script>
 {% endblock body %}
