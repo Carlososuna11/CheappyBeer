@@ -26,7 +26,6 @@
                 <img id="myimage"class="img-product mb-2 "  src="{% static imagen %}" alt="" width = "380px" height = "250px">
                 {% for field in form.visible_fields %}
                     {% if field.label == "Imagen del Licor" %}
-
                         <div class='{{field.id}}'>
                             <label class= "custom-file-upload">
                                 {{field}}
