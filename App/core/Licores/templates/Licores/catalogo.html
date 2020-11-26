@@ -28,20 +28,17 @@
         <button type="button" onclick="Validar()">Filtrar</button>
     </form>
 </div>
-<div class="row mb-4 provedores">        
-</div>
-    <h2>{{Licores}}</h2>
-        <button class="col btn-catalogo" onclick="plusSlides(-1)">
+<div class="row catalogo">        
+    <h2>Licores</h2>
+        <button class="col-lg-1 btn-catalogo" onclick="plusSlides(-1)">
             <i class="fas fa-chevron-left"></i>
         </button>
-        <div class=" catalogo">
-    {% for nombre in nombres2  %}
-            <div class="col product">
-                <a href="{% url 'descripcion' nombre nombre|fist_id_name %}"><img src="{% static nombre|to_and_licores %}" alt="" width="200"></a>
-            </div>
-    {% endfor %}
-        </div>
-        <button class="col btn-catalogo" onclick="plusSlides(1)">
+            {% for nombre in nombres2  %}
+                    <div class="col-lg-2 product">
+                        <a href="{% url 'descripcion' nombre nombre|fist_id_name %}"><img src="{% static nombre|to_and_licores %}" alt="" width="200"></a>
+                    </div>
+            {% endfor %}
+        <button class="col-lg-1 btn-catalogo" onclick="plusSlides(1)">
             <i class="fas fa-chevron-right"></i>
         </button>
 </div>
@@ -72,6 +69,7 @@
         {% endfor %}
     </div>
 </div>
+<script src="{% static 'Licores/js/main.js' %}"></script>
 <script>
     function Validar(){
         var precio = document.querySelector("#precio-form");
@@ -97,4 +95,5 @@
 
     }
 </script>
+
 {% endblock body %}

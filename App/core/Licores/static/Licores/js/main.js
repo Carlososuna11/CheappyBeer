@@ -24,8 +24,8 @@ function showSlides(n) {
     products[i].style.display = "none";
   }
 
-  slideIndex * 6 + 6 > products.length? start = products.length - 6: start = slideIndex * 6;
-  slideIndex * 6 + 6 > products.length? limit = products.length : limit = slideIndex * 6 + 6;
+  slideIndex * 3 + 3 > products.length? start = products.length - 3: start = slideIndex * 3;
+  slideIndex * 3 +  3 > products.length? limit = products.length : limit = slideIndex * 3 + 3;
 
   for (i = start; i < limit; i++) {
     products[i].style.display = "block";
