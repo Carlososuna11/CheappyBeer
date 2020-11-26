@@ -7,7 +7,7 @@
 {% block body %}
 <div class="row mb-4">
     <form class="row pl-3 filters">
-        <div><label for="email">Tipo</label>
+        <div class="ml-5 mr-2"><label for="email">Tipo</label>
         <select name="Tipo" id="tipo-select">
             <option value="Todos" selected>Todos</option>
             {% for tipo in tipos %}
@@ -15,8 +15,8 @@
             {% endfor %}
         </select>
         </div>
-        <div><label for="email">Precio</label><input type="number" name="Precio" id="precio-form" value = "0"></div>
-        <div><label for="email">Ubicacion</label>
+        <div class="mr-2"><label for="email">Precio</label><input style="width: 50px;" type="number" name="Precio" id="precio-form" value = "0"></div>
+        <div class="mr-2"><label for="email">Ubicacion</label>
         <select name="Ubicacion" id="ubicacion-select">
             <option value="Todos" selected>Todos</option>
             {% for ubicacion in ubicaciones %}
@@ -24,35 +24,32 @@
             {% endfor %}
         </select>
         </div>
-        <div><label for="email">Valoracion</label><input type="number" name="valoracion-form" id="valoracion-form" value = "0"></div>
+        <div class="mr-2"><label for="email">Valoracion</label><input style="width: 50px;" type="number" name="valoracion-form" id="valoracion-form" value = "0"></div>
         <button type="button" onclick="Validar()">Filtrar</button>
     </form>
 </div>
-<div class="row mb-4 provedores">        
-</div>
-    <h2>{{Licores}}</h2>
-        <button class="col btn-catalogo" onclick="plusSlides(-1)">
+<h2 class="ml-5 pl-5">Licores</h2>
+<div class="row catalogo justify-content-center">  
+        <button class="col-lg-1 btn-catalogo" onclick="plusSlides(-1)">
             <i class="fas fa-chevron-left"></i>
         </button>
-        <div class=" catalogo">
-    {% for nombre in nombres2  %}
-            <div class="col product">
-                <a href="{% url 'descripcion' nombre nombre|fist_id_name %}"><img src="{% static nombre|to_and_licores %}" alt="" width="200"></a>
-            </div>
-    {% endfor %}
-        </div>
-        <button class="col btn-catalogo" onclick="plusSlides(1)">
+            {% for nombre in nombres2  %}
+                    <div class="col-lg-2 product">
+                        <a href="{% url 'descripcion' nombre nombre|fist_id_name %}"><img src="{% static nombre|to_and_licores %}" alt="" width="200"></a>
+                    </div>
+            {% endfor %}
+        <button class="col-lg-1 btn-catalogo" onclick="plusSlides(1)">
             <i class="fas fa-chevron-right"></i>
         </button>
 </div>
 <div class="container">
-    <div class="row" style="width: 1100px;">
+    <div class="row" style="width: 1100px; justify-content: center;">
     {% for nombre in nombres%}
-            <div class="card col" style="width: 350px;">
+            <div class="card col" style="width: 350px; max-width: 500px;">
                     <div class="badge badge-warning">
                         <h5 class=" justify-content-center mw-100 card-title" style="font-size:30px;"> <b>{{nombre|mas_barato:precios}}$</b></h5>
                     </div>
-                    <img class="card-img-top" src="{% static nombre|to_and_img:precios %}" alt="Card image cap" width="380px" height="380px">
+                    <img class="card-img-top" src="{% static nombre|to_and_img:precios %}" alt="Card image cap">
                     <div class="card-body">
                     <a href="{% url 'descripcion' nombre precios|uno:nombre|val:1 %}">
                         <h5 class="card-title">{{nombre}}</h5>
@@ -73,6 +70,40 @@
     </div>
 </div>
 <script>
+
+        let slideIndex = 0;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+    showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+    showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+    let i;
+    let products = document.getElementsByClassName("product");
+    let limit;
+    let start;
+    
+        if (n > Math.floor(products.length/3)) {slideIndex = 0}
+        if (n < 0) {slideIndex = Math.floor(products.length/3)}
+        
+        for (i = 0; i < products.length; i++) {
+            products[i].style.display = "none";
+        }
+
+        slideIndex * 3 + 3 > products.length? start = products.length - 3: start = slideIndex * 3;
+        slideIndex * 3 +  3 > products.length? limit = products.length : limit = slideIndex * 3 + 3;
+
+        for (i = start; i < limit; i++) {
+            products[i].style.display = "block";
+        }
+    }
     function Validar(){
         var precio = document.querySelector("#precio-form");
         var tipo = document.querySelector("#tipo-select");
@@ -97,4 +128,5 @@
 
     }
 </script>
+
 {% endblock body %}

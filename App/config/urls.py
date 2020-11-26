@@ -20,7 +20,7 @@ from django.views.generic import *
 from core.Licores.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',Indexview.as_view()),
+    path('',Indexview.as_view(),name='home'),
     path('catalogo',Catalogo.as_view(),name='catalogo'),
     path('crear',CrearLicor.as_view(),name='crear'),
     path('editar/<int:pk>',ModificarLicor.as_view(),name='editar'),
