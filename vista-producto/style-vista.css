@@ -1,4 +1,4 @@
-* {
+*{
   font-family: "Ubuntu", sans-serif;
   margin: 0;
 }
@@ -11,11 +11,6 @@ body{
 nav a{
   color: black;
   font-weight: 600;
-}
-
-.table td{
-  vertical-align: inherit;
-  padding: 0.4rem 0.75rem;
 }
 
 .menu .container{
@@ -47,22 +42,42 @@ nav a{
   background: transparent;
 }
 
-.main-section {
-  /* padding: 1.5em 3em; */
-  width: 100%;
+.miclase{
+  background: black;
+  height: 130px;
+  color: white;
 }
 
-#first_row {
-  text-align: center;
+.description  div[class^="col"] {
+  background: white;
 }
 
-/* Aqui intento centrar verticalmente pero no funciona */
-table {
-  vertical-align: middle;
-  margin-top: auto;
-  margin-bottom: auto;
+.product-card{
+  border: none;
+  background-color: transparent;
 }
 
-.table-products{
-  background-color: whitesmoke;
+.card-body div[class^="col"] {
+  background: transparent;
+}
+
+.seccion col{
+  background: white;
+}
+
+.seccion div[class^="col"] img{
+  height: 150px;
+
+}
+
+.location img{
+  height: 100px;
+}
+
+.check{
+  align-items: baseline;
+}
+
+tr td{
+  vertical-align: inherit !important;
 }

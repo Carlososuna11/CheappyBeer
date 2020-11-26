@@ -17,15 +17,15 @@ function showSlides(n) {
   let limit;
   let start;
   
-  if (n > Math.floor(products.length/6)) {slideIndex = 0}
-  if (n < 0) {slideIndex = Math.floor(products.length/6)}
+  if (n > Math.floor(products.length/5)) {slideIndex = 0}
+  if (n < 0) {slideIndex = Math.floor(products.length/5)}
   
   for (i = 0; i < products.length; i++) {
     products[i].style.display = "none";
   }
 
-  slideIndex * 6 + 6 > products.length? start = products.length - 6: start = slideIndex * 6;
-  slideIndex * 6 + 6 > products.length? limit = products.length : limit = slideIndex * 6 + 6;
+  slideIndex * 5 + 5 > products.length? start = products.length - 5: start = slideIndex * 5;
+  slideIndex * 5 + 5 > products.length? limit = products.length : limit = slideIndex * 5 + 5;
 
   for (i = start; i < limit; i++) {
     products[i].style.display = "block";
